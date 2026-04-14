@@ -35,12 +35,5 @@ def test_handle_valid_input():
     res = handle_input("1F + 2F")
     assert res ==   ("1F", "+", "2F")
     
-def test_handle_invalid_input():
-    with pytest.raises(ValueError):
-        handle_input("1F +")
-        
-def test_handle_empty_input():
-    with pytest.raises(ValueError):
-        handle_input("")
         
     

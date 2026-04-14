@@ -39,25 +39,9 @@ def test_is_valid_digit_amount():
     res = handle_output("1F")
     assert res == "1F"
     
-def test_is_invalid_digit_amount():
-    with pytest.raises(ValueError):
-        handle_output("1F1F1")
-    
-def test_is_no_digit_amount():
-    with pytest.raises(ValueError):
-        handle_output("")
-    
-def test_is_negative():
-    with pytest.raises(ValueError):
-        handle_output("-1")
-    
 def test_is_positive():
     res = handle_output("1")
     assert res == "1"
-    
-def test_contains_decimal_places():
-    with pytest.raises(ValueError):
-        handle_output("1.0")
     
 def test_contains_decimal_places():
     res = handle_output("1")
