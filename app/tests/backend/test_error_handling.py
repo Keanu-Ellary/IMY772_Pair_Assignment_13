@@ -6,6 +6,9 @@ from backend.features.input_handling import (
 from backend.features.output_handling import (
     handle_output,
 )
+from backend.features.addition import (
+    perform_addition
+)
 
 def test_handle_invalid_input():
     with pytest.raises(ValueError):
@@ -30,3 +33,11 @@ def test_is_negative():
 def test_contains_decimal_places():
     with pytest.raises(ValueError):
         handle_output("1.0")
+        
+def test_empty_addition():
+    with pytest.raises(ValueError):
+        perform_addition("", "B78")
+        
+def test_invalid_addition():
+    with pytest.raises(ValueError):
+        perform_addition("1FF", "B78")
