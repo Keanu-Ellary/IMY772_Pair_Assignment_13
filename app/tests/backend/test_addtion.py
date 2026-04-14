@@ -1,6 +1,6 @@
 import pytest
 
-from app.backend.features.arithmetic_calculation.addition import (
+from backend.features.arithmetic_calculation.addition import (
     perform_addition,
     valid_hexadecimal
 )
