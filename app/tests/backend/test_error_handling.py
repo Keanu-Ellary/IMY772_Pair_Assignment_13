@@ -1,14 +1,18 @@
 import pytest
 
 from backend.features.input_handling import (
-    handle_input
+    handle_input,
 )
 from backend.features.output_handling import (
     handle_output,
 )
-from backend.features.addition import (
+from backend.features.arithmetic_calculation.addition import (
     perform_addition
 )
+from backend.features.arithmetic_calculation.division import (
+    perform_division
+)
+
 
 def test_handle_invalid_input():
     with pytest.raises(ValueError):
@@ -41,3 +45,15 @@ def test_empty_addition():
 def test_invalid_addition():
     with pytest.raises(ValueError):
         perform_addition("1FF", "B78")
+        
+def test_empty_division():
+    with pytest.raises(ValueError):
+        perform_division("", "B78")
+        
+def test_invalid_division():
+    with pytest.raises(ValueError):
+        perform_division("1FF", "B78")
+        
+def test_division_by_zero():
+    with pytest.raises(ValueError):
+        perform_division("1FF", "0")
