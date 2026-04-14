@@ -6,7 +6,7 @@ from backend.features.input_handling import (
 from backend.features.output_handling import (
     handle_output,
 )
-from backend.features.addition import (
+from app.backend.features.arithmetic_calculation.addition import (
     perform_addition
 )
 
