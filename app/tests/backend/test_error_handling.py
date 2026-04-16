@@ -19,7 +19,8 @@ from backend.features.arithmetic_calculation.multiplication import (
     perform_multiplication
 )
 from backend.calculator import (
-    calculate
+    calculate,
+    calculate_multiple
 )
 
 
@@ -151,7 +152,41 @@ def test_calculate_invalid_division():
         
 def test_calculate_division_by_zero():
     with pytest.raises(ValueError) as error:
-        calculate("1FF / 0")
+        calculate("1F / 0")
+    assert str(error.value) == "Division by 0 is not allowed"
+
+"Calculate Multiple"
+def test_calculate_multiple_invalid_input():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("1F +")
+    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+        
+def test_calculate_multiple_empty_input():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("")
+    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+    
+def test_calculate_multiple_is_negative():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("4 - 3 - 2")
+    assert str(error.value) == "Output of subtraction must not be negative"
+    
+def test_calculate_multiple_contains_decimal_places():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("4 / 4 / 4")
+    assert str(error.value) == "Decimal results not allowed"
+        
+def test_calculate_multiple_invalid_addition():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("1FF + B78 + 6")
     assert str(error.value) == "Input values must be 1 or 2 digits"
-
-
+        
+def test_calculate_multiple_invalid_division():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("1FF / B78 * 7")
+    assert str(error.value) == "Input values must be 1 or 2 digits"
+        
+def test_calculate_multiple_division_by_zero():
+    with pytest.raises(ValueError) as error:
+        calculate_multiple("1F + 1 / 0")
+    assert str(error.value) == "Division by 0 is not allowed"
