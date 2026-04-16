@@ -2,13 +2,16 @@ import re
 
 def perform_division(value_one, value_two):
     if not valid_hexadecimal(value_one) or not valid_hexadecimal(value_two):
-        raise ValueError("Input for addition must be a valid hexadecimal bewteen 1 and 2 digits")
+        raise ValueError("Input for division must be a valid hexadecimal bewteen 1 and 2 digits")
     
     decimal_one = int(value_one, 16)
     decimal_two = int(value_two, 16)
     
     if decimal_two == 0:
         raise ValueError("Division by 0 is not allowed")
+    
+    if decimal_one % decimal_two != 0:
+        raise ValueError("Decimal results not allowed")
     
     result_decimal = decimal_one // decimal_two
     
