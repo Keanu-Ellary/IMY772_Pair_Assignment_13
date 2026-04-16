@@ -21,18 +21,20 @@ from backend.features.output_handling import(
 def calculate_multiple(user_input):
     user_input_data = user_input.strip().split()
 
-    if len(user_input_data) <3:
-        return calculate(user_input)
+    try:
+        if len(user_input_data) <3:
+            return calculate(user_input)
 
-    while len(user_input_data) > 1:
-        expr = " ".join(user_input_data[:3])
+        while len(user_input_data) > 1:
+            expr = " ".join(user_input_data[:3])
 
-        result = calculate(expr)
+            result = calculate(expr)
 
-        user_input_data = [result] + user_input_data[3:]
+            user_input_data = [result] + user_input_data[3:]
 
-    return user_input_data[0]
-
+        return user_input_data[0]
+    except Exception as e:
+        raise
 
 def calculate(user_input):
     try:
