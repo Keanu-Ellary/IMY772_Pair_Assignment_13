@@ -17,10 +17,6 @@ def test_valid_division():
     res = perform_division("20", "2")
     assert res ==  "10"
     
-def test_valid_division():
-    res = perform_division("8A", "B7")
-    assert res ==  "0"
-    
 def test_valid_hexadecimal():
     res = valid_hexadecimal("1F")
     assert res == True

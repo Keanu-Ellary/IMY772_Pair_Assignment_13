@@ -10,6 +10,9 @@ def perform_division(value_one, value_two):
     if decimal_two == 0:
         raise ValueError("Division by 0 is not allowed")
     
+    if decimal_one % decimal_two != 0:
+        raise ValueError("Decimal results not allowed")
+    
     result_decimal = decimal_one // decimal_two
     
     final_result = hex(result_decimal)[2:].upper()
