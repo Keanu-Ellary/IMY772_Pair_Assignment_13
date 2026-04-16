@@ -35,5 +35,5 @@ def calculate(user_input):
         
         return final_result
     except Exception as e:
-        print(e)
+        raise
     

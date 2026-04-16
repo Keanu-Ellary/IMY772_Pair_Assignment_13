@@ -18,6 +18,9 @@ from backend.features.arithmetic_calculation.division import (
 from backend.features.arithmetic_calculation.multiplication import (
     perform_multiplication
 )
+from backend.calculator import (
+    calculate
+)
 
 
 def test_handle_invalid_input():
@@ -95,3 +98,38 @@ def test_no_decimal():
 def test_output_too_long():
     with pytest.raises(ValueError):
         perform_subtraction("FFFF", "1")
+        
+        
+"Calculate"
+def test_calculate_invalid_input():
+    with pytest.raises(ValueError):
+        calculate("1F +")
+        
+def test_calculate_empty_input():
+    with pytest.raises(ValueError):
+        calculate("")
+    
+def test_calculate_is_negative():
+    with pytest.raises(ValueError):
+        calculate("4 - 5")
+    
+def test_calculate_contains_decimal_places():
+    with pytest.raises(ValueError):
+        calculate("1 / 4")
+        
+def test_calculate_invalid_addition():
+    with pytest.raises(ValueError):
+        calculate("1FF + B78")
+        
+def test_calculate_invalid_division():
+    with pytest.raises(ValueError):
+        calculate("1FF / B78")
+        
+def test_calculate_division_by_zero():
+    with pytest.raises(ValueError):
+        calculate("1FF / 0")
+
+def test_calculate_output_too_long():
+    with pytest.raises(ValueError):
+        calculate("FFFF - 1")
+
