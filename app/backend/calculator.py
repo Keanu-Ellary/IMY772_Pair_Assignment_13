@@ -18,6 +18,22 @@ from backend.features.output_handling import(
     handle_output
 )
 
+def calculate_multiple(user_input):
+    user_input_data = user_input.strip().split()
+
+    if len(user_input_data) <3:
+        return calculate(user_input)
+
+    while len(user_input_data) > 1:
+        expr = " ".join(user_input_data[:3])
+
+        result = calculate(expr)
+
+        user_input_data = [result] + user_input_data[3:]
+
+    return user_input_data[0]
+
+
 def calculate(user_input):
     try:
         value_one, operator, value_two = handle_input(user_input)

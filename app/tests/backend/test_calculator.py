@@ -1,7 +1,8 @@
 import pytest
 
 from backend.calculator import (
-    calculate
+    calculate,
+    calculate_multiple
 )
 
 def test_calculate_addition():
@@ -19,3 +20,7 @@ def test_calculate_division():
 def test_calculate_multiplication():
     res = calculate("6 * 6")
     assert res == "24"
+    
+def test_calculate_expression():
+    res = calculate_multiple("6 * 6 + 2")
+    assert res == "26"
