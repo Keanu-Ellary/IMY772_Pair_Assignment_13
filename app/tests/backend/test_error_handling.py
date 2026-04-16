@@ -9,8 +9,14 @@ from backend.features.output_handling import (
 from backend.features.arithmetic_calculation.addition import (
     perform_addition
 )
+from backend.features.arithmetic_calculation.subtraction import (
+    perform_subtraction
+)
 from backend.features.arithmetic_calculation.division import (
     perform_division
+)
+from backend.features.arithmetic_calculation.multiplication import (
+    perform_multiplication
 )
 
 
@@ -57,3 +63,35 @@ def test_invalid_division():
 def test_division_by_zero():
     with pytest.raises(ValueError):
         perform_division("1FF", "0")
+
+def test_output_too_long():
+    with pytest.raises(ValueError):
+        perform_multiplication("FFFF", "FF")
+
+def test_invalid_hex_number():
+    with pytest.raises(ValueError):
+        perform_multiplication("Z", "2")
+
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        perform_multiplication("123", "2")
+
+def test_negative_result():
+    with pytest.raises(ValueError):
+        perform_subtraction("5", "A")
+
+def test_invalid_hex_number():
+    with pytest.raises(ValueError):
+        perform_subtraction("G", "1")
+
+def test_invalid_input():
+    with pytest.raises(ValueError):
+        perform_subtraction("ABC", "1")
+
+def test_no_decimal():
+    result = perform_multiplication("2", "2")
+    assert "." not in result
+
+def test_output_too_long():
+    with pytest.raises(ValueError):
+        perform_subtraction("FFFF", "1")
