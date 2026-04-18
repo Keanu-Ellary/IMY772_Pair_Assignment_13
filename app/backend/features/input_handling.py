@@ -1,6 +1,9 @@
 import re
 
 def handle_input(user_input):
+    if (user_input == ""):
+        raise ValueError("Input cannot be empty")
+    
     "input must contain valid hexadecimals"
     input_values = user_input.strip().split()
     if len(input_values) < 3:
