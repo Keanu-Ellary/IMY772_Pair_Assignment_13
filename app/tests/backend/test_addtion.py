@@ -9,11 +9,11 @@ def test_valid_addition_simple():
     res = perform_addition("1", "1")
     assert res ==  "2"
     
-def test_valid_addition():
-    res = perform_addition("5", "5")
-    assert res ==  "10"
+def test_valid_addition_mix_inputs():
+    res = perform_addition("5", "A")
+    assert res ==  "F"
     
-def test_valid_addition():
+def test_valid_addition_two_digits():
     res = perform_addition("10", "10")
     assert res ==  "20"
     

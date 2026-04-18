@@ -7,6 +7,14 @@ from backend.features.input_handling import (
     is_hexadecimal
 )
 
+def test_handle_valid_input_simple():
+    res = handle_input("1 + 2")
+    assert res ==   ("1", "+", "2")
+    
+def test_handle_valid_input_complex():
+    res = handle_input("1F + 2F")
+    assert res ==   ("1F", "+", "2F")
+
 def test_contains_valid_operator():
     res = contains_valid_operator("+")
     assert res == True
@@ -30,10 +38,6 @@ def test_is_hexadecimal():
 def test_is_not_hexadecimal():
     res = is_hexadecimal("IF")
     assert res == False
-    
-def test_handle_valid_input():
-    res = handle_input("1F + 2F")
-    assert res ==   ("1F", "+", "2F")
     
         
     

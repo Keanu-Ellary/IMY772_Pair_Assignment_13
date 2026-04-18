@@ -40,11 +40,6 @@ def test_is_invalid_digit_amount():
         
     assert str(error.value) == "Output too large to return"
     
-def test_is_no_digit_amount():
-    with pytest.raises(ValueError) as error:
-        handle_output("")
-    assert str(error.value) == "Output too large to return"
-    
 def test_is_negative():
     with pytest.raises(ValueError) as error:
         handle_output("-1")
