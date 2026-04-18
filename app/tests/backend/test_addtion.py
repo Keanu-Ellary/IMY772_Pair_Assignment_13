@@ -5,7 +5,7 @@ from backend.features.arithmetic_calculation.addition import (
     valid_hexadecimal
 )
 
-def test_valid_addition():
+def test_valid_addition_simple():
     res = perform_addition("1", "1")
     assert res ==  "2"
     
@@ -17,7 +17,7 @@ def test_valid_addition():
     res = perform_addition("10", "10")
     assert res ==  "20"
     
-def test_valid_addition():
+def test_valid_addition_complex():
     res = perform_addition("8A", "B7")
     assert res ==  "141"
     
@@ -25,7 +25,7 @@ def test_valid_hexadecimal():
     res = valid_hexadecimal("1F")
     assert res == True
     
-def test_valid_hexadecimal():
+def test_invalid_hexadecimal():
     res = valid_hexadecimal("1FF")
     assert res == False
     
