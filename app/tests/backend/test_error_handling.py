@@ -32,7 +32,7 @@ def test_handle_invalid_input():
 def test_handle_empty_input():
     with pytest.raises(ValueError) as error:
         handle_input("")
-    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+    assert str(error.value) == "Input cannot be empty"
 
 def test_is_invalid_digit_amount():
     with pytest.raises(ValueError) as error:
@@ -123,7 +123,7 @@ def test_calculate_invalid_input():
 def test_calculate_empty_input():
     with pytest.raises(ValueError) as error:
         calculate("")
-    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+    assert str(error.value) == "Input cannot be empty"
     
 def test_calculate_is_negative():
     with pytest.raises(ValueError) as error:
@@ -159,7 +159,7 @@ def test_calculate_multiple_invalid_input():
 def test_calculate_multiple_empty_input():
     with pytest.raises(ValueError) as error:
         calculate_multiple("")
-    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+    assert str(error.value) == "Input cannot be empty"
     
 def test_calculate_multiple_is_negative():
     with pytest.raises(ValueError) as error:
