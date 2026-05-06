@@ -28,6 +28,11 @@ jobs:
     - name: Run backend tests
       run: pytest
 
+    - name: Start backend server
+      working-directory: ./app
+      run: |
+        nohup python -m backend.app &
+        sleep 5
 
     - name: Set up node
       uses: actions/setup-node@v4
