@@ -25,7 +25,14 @@
         {
             calculatorInput.value = calculatorInput.value.slice(0, -1)
         }
+        const removedInput = calculatorInput.value[calculatorInput.value.length-1]
         calculatorInput.value = calculatorInput.value.slice(0, -1)
+        if (removedInput=="+" || removedInput=="-" || removedInput=="×" || removedInput=="÷" ) {
+            if (calculatorInput.value.endsWith(' '))
+            {
+                calculatorInput.value = calculatorInput.value.slice(0, -1)
+            }
+        }
         
         calculatorOutput.value = ""
     }
@@ -47,6 +54,7 @@
         if (data.error)
         {
             alert(data.error);
+            calculatorOutput.value = "Error";
         }
         else
         {
@@ -61,10 +69,10 @@
     <div class="min-h-screen flex items-center justify-center bg-black">
         <div class="flex flex-col w-120 h-200 border border-gray-500 rounded-xl"> 
             <div class="flex flex-col w-110 h-40 border border-gray-500 rounded-xl m-5 bg-gray-900 text-white p-4">
-                <div class="text-4xl">
+                <div class="text-4xl calculator-input">
                     {{ calculatorInput }}
                 </div>
-                <div class="flex flex-row items-end justify-end text-5xl">
+                <div class="flex flex-row items-end justify-end text-5xl calculator-output">
                     {{ calculatorOutput }}
                 </div>
             </div>
@@ -81,7 +89,7 @@
                     <button @click="addToCalculatorInput('F')" class="input-button">
                         F
                     </button>
-                    <button class="operation-button" @click="addOperationToCalculatorInput('÷')">
+                    <button class="operation-button division-button" @click="addOperationToCalculatorInput('÷')">
                         <Divide class="w-10 h-8"/>
                     </button>
                 </div>
@@ -96,7 +104,7 @@
                     <button class="input-button" @click="addToCalculatorInput('C')">
                         <span>C</span>
                     </button>
-                    <button class="operation-button" @click="addOperationToCalculatorInput('×')">
+                    <button class="operation-button multiplication-button" @click="addOperationToCalculatorInput('×')">
                         <X class="w-10 h-8"/>
                     </button>
                 </div>
@@ -111,7 +119,7 @@
                     <button class="input-button" @click="addToCalculatorInput('9')">
                         <span>9</span>
                     </button>
-                    <button class="operation-button" @click="addOperationToCalculatorInput('-')">
+                    <button class="operation-button subtraction-button" @click="addOperationToCalculatorInput('-')">
                         <Minus class="w-10 h-8"/>
                     </button>
                 </div>
@@ -126,7 +134,7 @@
                     <button class="input-button" @click="addToCalculatorInput('6')">
                         <span>6</span>
                     </button>
-                    <button class="operation-button" @click="addOperationToCalculatorInput('+')">
+                    <button class="operation-button addition-button" @click="addOperationToCalculatorInput('+')">
                         <Plus class="w-10 h-8"/>
                     </button>
                 </div>
