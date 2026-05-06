@@ -31,10 +31,28 @@
         }
     }
 
-    const calculateOutput = () => {
+    const calculateOutput = async () => {
         let calculatorValidInput = calculatorInput.value.replaceAll('÷', '/')
         calculatorValidInput = calculatorValidInput.replaceAll('×', '*')
-        calculatorOutput.value = "output"
+        
+        const res = await fetch('http://localhost:5000/calculate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({expression: calculatorValidInput})
+        });
+
+        const data = await res.json();
+
+        if (data.error)
+        {
+            alert(data.error);
+        }
+        else
+        {
+            calculatorOutput.value = data.result;
+        }
     }
 
 
