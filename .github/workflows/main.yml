@@ -2,9 +2,9 @@ name: Run CI/CD Tests
 
 on:
   push:
-    branches: [main, Section-2, Section-3]
+    branches: "**"
   pull_request:
-    branches: [main, Section-2, Section-3]
+    branches: "**"
 
 jobs:
   test:
