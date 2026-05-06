@@ -27,6 +27,7 @@
         }
         calculatorInput.value = calculatorInput.value.slice(0, -1)
         
+        calculatorOutput.value = ""
     }
 
     const calculateOutput = async () => {
