@@ -17,6 +17,7 @@
 
     const clearInput = () => {
         calculatorInput.value = ""
+        calculatorOutput.value = ""
     }
 
     const removeLastInput = () => {
@@ -25,10 +26,7 @@
             calculatorInput.value = calculatorInput.value.slice(0, -1)
         }
         calculatorInput.value = calculatorInput.value.slice(0, -1)
-        if (calculatorInput.value.endsWith(' '))
-        {
-            calculatorInput.value = calculatorInput.value.slice(0, -1)
-        }
+        
     }
 
     const calculateOutput = async () => {
