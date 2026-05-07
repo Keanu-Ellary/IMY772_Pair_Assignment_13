@@ -418,20 +418,19 @@ describe('Error Handling', () => {
         
     })
 
-    test('Not all inputs have 1 or 2 digits must display an erro', async() => {
+    
+    test('Inputs without 2 hexadecimals and na operator must display an error', async() => {
         const inputButtons = calculator.findAll('button')
         const inputButton = inputButtons.find(b => b.text() === '4')
         const equalButton = calculator.find('.equal-button')
         const operatorButton = calculator.find('.addition-button')
         await inputButton.trigger('click')
         await inputButton.trigger('click')
-        await inputButton.trigger('click')
         await operatorButton.trigger('click')
-        await inputButton.trigger('click')
         await equalButton.trigger('click')
         
         expect(window.alert).toHaveBeenCalled()
-        expect(window.alert).toHaveBeenCalledWith("Each value must be 1 or 2 digits")
+        expect(window.alert).toHaveBeenCalledWith("Input must have atleast 2 hexadecimals values and 1 operator")
         
     })
 

@@ -43,7 +43,8 @@
             return false
         }
 
-        const inputValues = input.split(' ');
+        const inputValues = input.split(' ').filter(value => value !== '');
+
         for (const value of inputValues) {
             if (value!=='+' && value!=='-' && value!=='*' && value!=='/') {
                 if (value.length > 2) {
@@ -53,8 +54,8 @@
             }
         }
 
-        if (inputValues.length <3) {
-            alert("Input must contain 2 hexadecimal values and an operator")
+        if (inputValues.length < 3) {
+            alert("Input must have atleast 2 hexadecimals values and 1 operator")
             return false
         }
 
