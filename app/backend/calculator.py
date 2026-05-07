@@ -23,7 +23,7 @@ def calculate_multiple(user_input):
 
     try:
         if len(user_input_data) <3:
-            return calculate(user_input)
+            return calculate(user_input, False)
         
         is_combined_value = False
 

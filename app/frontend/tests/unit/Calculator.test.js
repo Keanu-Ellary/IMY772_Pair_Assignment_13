@@ -418,8 +418,23 @@ describe('Error Handling', () => {
         
     })
 
+    test('Inputs that are more than 2 digits must display an error', async() => {
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '4')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.addition-button')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await equalButton.trigger('click')
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Input values must be 1 or 2 digits")
+        
+    })
     
-    test('Inputs without 2 hexadecimals and na operator must display an error', async() => {
+    test('Inputs without 2 hexadecimals and an operator must display an error', async() => {
         const inputButtons = calculator.findAll('button')
         const inputButton = inputButtons.find(b => b.text() === '4')
         const equalButton = calculator.find('.equal-button')

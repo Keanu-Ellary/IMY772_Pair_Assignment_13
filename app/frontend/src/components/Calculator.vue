@@ -48,7 +48,7 @@
         for (const value of inputValues) {
             if (value!=='+' && value!=='-' && value!=='*' && value!=='/') {
                 if (value.length > 2) {
-                    alert("Each value must be 1 or 2 digits")
+                    alert("Input values must be 1 or 2 digits")
                     return false
                 }
             }
