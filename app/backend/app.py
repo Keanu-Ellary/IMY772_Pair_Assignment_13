@@ -17,7 +17,7 @@ def calculate_route():
     except Exception as e:
         return jsonify({"error": "Server error"}), 500
     
-    return jsonify({"result": res})
+    return jsonify({"result": res}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
