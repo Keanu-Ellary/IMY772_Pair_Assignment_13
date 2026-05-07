@@ -27,12 +27,42 @@ jobs:
     - name: Run backend tests
       run: pytest
     
-  frontend-and-integration-tests:
+  frontend-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+      with: 
+        node-version: "20"
+
+    - name: Install frontend dependencies
+      working-directory: ./app/frontend
+      run: npm install
+
+    - name: Run frontend tests
+      working-directory: ./app/frontend
+      run: npm run test:unit
+
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11.7"
+
+    - name: Install dependancies
+      run: | 
+        python -m pip install --upgrade pip
+        pip install flask flask-cors
 
     - name: Start backend server
       working-directory: ./app
