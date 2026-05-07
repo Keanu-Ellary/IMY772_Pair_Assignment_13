@@ -44,13 +44,18 @@
         }
 
         const inputValues = input.split(' ');
-        for (const value in inputValues) {
-            if (!value.includes('+') && !value.includes('-') && !value.includes('*') && !value.includes('/')) {
+        for (const value of inputValues) {
+            if (value!=='+' && value!=='-' && value!=='*' && value!=='/') {
                 if (value.length > 2) {
                     alert("Each value must be 1 or 2 digits")
                     return false
                 }
             }
+        }
+
+        if (inputValues.length <3) {
+            alert("Input must contain 2 hexadecimal values and an operator")
+            return false
         }
 
         return true
