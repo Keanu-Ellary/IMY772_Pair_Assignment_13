@@ -8,11 +8,11 @@ from backend.features.input_handling import (
 )
 
 def test_handle_valid_input_simple():
-    res = handle_input("1 + 2")
+    res = handle_input("1 + 2", False)
     assert res ==   ("1", "+", "2")
     
 def test_handle_valid_input_complex():
-    res = handle_input("1F + 2F")
+    res = handle_input("1F + 2F", False)
     assert res ==   ("1F", "+", "2F")
 
 def test_contains_valid_operator():
