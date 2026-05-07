@@ -1,5 +1,5 @@
 import { mount, flushPromises } from '@vue/test-utils'
-import Calculator from '../src/components/Calculator.vue'
+import Calculator from '../../src/components/Calculator.vue'
 import { describe, test, expect, vi } from 'vitest'
 
 describe('Calculator', () => {
@@ -355,6 +355,7 @@ describe('Error Handling', () => {
 
     beforeEach(async() => {
         calculator = mount(Calculator)
+        window.alert = vi.fn()
         const inputButtons = calculator.findAll('button')
         const clearButton = inputButtons[inputButtons.length - 2]
         await clearButton.trigger('click')
@@ -387,13 +388,10 @@ describe('Error Handling', () => {
     })
 
     test('Alerts error Successfully', async() => {
-        window.alert = vi.fn()
-
         const inputButtons = calculator.findAll('button')
         const inputButton = inputButtons.find(b => b.text() === '4')
         const operatorButton = calculator.find('.addition-button')
         const equalButton = calculator.find('.equal-button')
-        await inputButton.trigger('click')
         await inputButton.trigger('click')
         await inputButton.trigger('click')
         await operatorButton.trigger('click')
@@ -404,6 +402,125 @@ describe('Error Handling', () => {
         
         expect(window.alert).toHaveBeenCalled()
         expect(window.alert).toHaveBeenCalledWith("Error")
+        
+    })
+
+    test('No operator in input must display error', async() => {
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '4')
+        const equalButton = calculator.find('.equal-button')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await equalButton.trigger('click')
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Input must contain an operator")
+        
+    })
+
+    test('Inputs that are more than 2 digits must display an error', async() => {
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '4')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.addition-button')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await equalButton.trigger('click')
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Input values must be 1 or 2 digits")
+        
+    })
+    
+    test('Inputs without 2 hexadecimals and an operator must display an error', async() => {
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '4')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.addition-button')
+        await inputButton.trigger('click')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await equalButton.trigger('click')
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Input must have atleast 2 hexadecimals values and 1 operator")
+        
+    })
+
+    test('Negative output should display an error', async() => {
+        window.alert = vi.fn()
+
+        global.fetch = vi.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ result: '-2' })
+            })
+        )
+
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '4')
+        const inputButton2 = inputButtons.find(b => b.text() === '6')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.subtraction-button')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await inputButton2.trigger('click')
+        await equalButton.trigger('click')
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Output is negative")
+        
+    })
+
+    test('Output greater than 4 digits should display an error', async() => {
+        window.alert = vi.fn()
+
+        global.fetch = vi.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ result: '10000' })
+            })
+        )
+
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === 'A')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.multiplication-button')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await inputButton.trigger('click')
+        await equalButton.trigger('click')
+
+        await flushPromises()
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Output is greater than 4 digits")
+        
+    })
+
+    test('Output with decimal places should display an error', async() => {
+        window.alert = vi.fn()
+
+        global.fetch = vi.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ result: '10.0' })
+            })
+        )
+
+        const inputButtons = calculator.findAll('button')
+        const inputButton = inputButtons.find(b => b.text() === '2')
+        const inputButton2 = inputButtons.find(b => b.text() === '4')
+        const equalButton = calculator.find('.equal-button')
+        const operatorButton = calculator.find('.division-button')
+        await inputButton.trigger('click')
+        await operatorButton.trigger('click')
+        await inputButton2.trigger('click')
+        await equalButton.trigger('click')
+
+        await flushPromises()
+        
+        expect(window.alert).toHaveBeenCalled()
+        expect(window.alert).toHaveBeenCalledWith("Output has decimal places")
         
     })
 

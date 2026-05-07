@@ -1,6 +1,6 @@
 import re
 
-def handle_input(user_input):
+def handle_input(user_input, has_combined_value):
     if (user_input == ""):
         raise ValueError("Input cannot be empty")
     
@@ -16,8 +16,9 @@ def handle_input(user_input):
         raise ValueError("Invalid operator used")
 
     "input must be 1 or 2 digits"
-    if not is_one_or_two_digits(value_one):
-        raise ValueError("Input values must be 1 or 2 digits")
+    if (not has_combined_value):
+        if not is_one_or_two_digits(value_one):
+            raise ValueError("Input values must be 1 or 2 digits")
     if not is_one_or_two_digits(value_two):
         raise ValueError("Input values must be 1 or 2 digits")
 
