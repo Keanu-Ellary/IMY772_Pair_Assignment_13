@@ -123,7 +123,7 @@ jobs:
 
     - name: Install playwright dependencies
       working-directory: ./app/frontend
-      run: npx playwright install --with-deps
+      run: npx playwright install
 
     - name: Run e2e tests
       working-directory: ./app/frontend
