@@ -124,10 +124,10 @@
     <div class="min-h-screen flex items-center justify-center bg-black">
         <div class="flex flex-col w-120 h-200 border border-gray-500 rounded-xl"> 
             <div class="flex flex-col w-110 h-40 border border-gray-500 rounded-xl m-5 bg-gray-900 text-white p-4">
-                <div class="text-4xl calculator-input">
+                <div class="text-4xl calculator-input" data-testid="calculator-input">
                     {{ calculatorInput }}
                 </div>
-                <div class="flex flex-row items-end justify-end text-5xl calculator-output">
+                <div class="flex flex-row items-end justify-end text-5xl calculator-output" data-testid="calculator-output">
                     {{ calculatorOutput }}
                 </div>
             </div>
@@ -135,86 +135,86 @@
             <div class="flex flex-col mx-4 text-3xl">
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button @click="addToCalculatorInput('D')" class="input-button">
+                    <button @click="addToCalculatorInput('D')" class="input-button" data-testid="btn-d">
                         D
                     </button>
-                    <button @click="addToCalculatorInput('E')" class="input-button">
+                    <button @click="addToCalculatorInput('E')" class="input-button" data-testid="btn-e">
                         E
                     </button>
-                    <button @click="addToCalculatorInput('F')" class="input-button">
+                    <button @click="addToCalculatorInput('F')" class="input-button" data-testid="btn-f">
                         F
                     </button>
-                    <button class="operation-button division-button" @click="addOperationToCalculatorInput('÷')">
+                    <button class="operation-button division-button" data-testid="btn-div" @click="addOperationToCalculatorInput('÷')">
                         <Divide class="w-10 h-8"/>
                     </button>
                 </div>
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button @click="addToCalculatorInput('A')" class="input-button">
+                    <button @click="addToCalculatorInput('A')" class="input-button" data-testid="btn-a">
                         <span>A</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('B')">
+                    <button class="input-button" data-testid="btn-b" @click="addToCalculatorInput('B')">
                         <span>B</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('C')">
+                    <button class="input-button" data-testid="btn-c" @click="addToCalculatorInput('C')">
                         <span>C</span>
                     </button>
-                    <button class="operation-button multiplication-button" @click="addOperationToCalculatorInput('×')">
+                    <button class="operation-button multiplication-button" data-testid="btn-mult" @click="addOperationToCalculatorInput('×')">
                         <X class="w-10 h-8"/>
                     </button>
                 </div>
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button class="input-button" @click="addToCalculatorInput('7')">
+                    <button class="input-button" data-testid="btn-7" @click="addToCalculatorInput('7')">
                         <span>7</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('8')">
+                    <button class="input-button" data-testid="btn-8" @click="addToCalculatorInput('8')">
                         <span>8</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('9')">
+                    <button class="input-button" data-testid="btn-9" @click="addToCalculatorInput('9')">
                         <span>9</span>
                     </button>
-                    <button class="operation-button subtraction-button" @click="addOperationToCalculatorInput('-')">
+                    <button class="operation-button subtraction-button" data-testid="btn-minus" @click="addOperationToCalculatorInput('-')">
                         <Minus class="w-10 h-8"/>
                     </button>
                 </div>
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button class="input-button" @click="addToCalculatorInput('4')">
+                    <button class="input-button" data-testid="btn-4" @click="addToCalculatorInput('4')">
                         <span>4</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('5')">
+                    <button class="input-button" data-testid="btn-5" @click="addToCalculatorInput('5')">
                         <span>5</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('6')">
+                    <button class="input-button" data-testid="btn-6" @click="addToCalculatorInput('6')">
                         <span>6</span>
                     </button>
-                    <button class="operation-button addition-button" @click="addOperationToCalculatorInput('+')">
+                    <button class="operation-button addition-button" data-testid="btn-plus" @click="addOperationToCalculatorInput('+')">
                         <Plus class="w-10 h-8"/>
                     </button>
                 </div>
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button class="input-button" @click="addToCalculatorInput('1')">
+                    <button class="input-button" data-testid="btn-1" @click="addToCalculatorInput('1')">
                         <span>1</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('2')">
+                    <button class="input-button" data-testid="btn-2" @click="addToCalculatorInput('2')">
                         <span>2</span>
                     </button>
-                    <button class="input-button" @click="addToCalculatorInput('3')">
+                    <button class="input-button" data-testid="btn-3" @click="addToCalculatorInput('3')">
                         <span>3</span>
                     </button>
-                    <button class="equal-button" @click="calculateOutput">
+                    <button class="equal-button" data-testid="btn-equals" @click="calculateOutput">
                         <Equal class="w-10 h-8"/>
                     </button>
                 </div>
 
                 <div class="flex flex-row gap-2 justify-between my-4">
-                    <button class="input-button" @click="addToCalculatorInput('0')">
+                    <button class="input-button" data-testid="btn-0" @click="addToCalculatorInput('0')">
                         <span>0</span>
                     </button>
                     <div class="flex flex-row gap-8">
-                        <button class="clear-button"  @click="clearInput">
+                        <button class="clear-button" data-testid="btn-clear" @click="clearInput">
                             <Trash class="w-12 h-8"/>
                         </button>
                         <button class="clear-button" @click="removeLastInput">
