@@ -167,6 +167,32 @@ describe("API Integration", () => {
         expect(data.error).toBeDefined();
         expect(data.error).toBe("Input must have atleast 2 hexadecimals values and 1 operator")
     });
+    test('Should handle invalid input - Single number', async() => {
+        const res = await fetch('http://localhost:5000/calculate', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({expression: "A"})
+        });
+
+        const data = await res.json();
+        
+        expect(res.ok).toBe(false);
+        expect(data.error).toBeDefined();
+        expect(data.error).toBe("Input must have atleast 2 hexadecimals values and 1 operator")
+    });
+    test('Should handle invalid input - Single operator', async() => {
+        const res = await fetch('http://localhost:5000/calculate', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({expression: "+"})
+        });
+
+        const data = await res.json();
+        
+        expect(res.ok).toBe(false);
+        expect(data.error).toBeDefined();
+        expect(data.error).toBe("Input must have atleast 2 hexadecimals values and 1 operator")
+    });
     test('Should handle empty input', async() => {
         const res = await fetch('http://localhost:5000/calculate', {
             method: 'POST',
@@ -232,7 +258,7 @@ describe("API Integration", () => {
         expect(data.error).toBeDefined();
         expect(data.error).toBe("Input values must be a hexadecimal")
     });
-    test('Performs Addition Unsuccessfully - Empty addition', async() => {
+    test('Performs Addition Unsuccessfully - Incorrect addition input', async() => {
         const res = await fetch('http://localhost:5000/calculate', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -245,7 +271,7 @@ describe("API Integration", () => {
         expect(data.error).toBeDefined();
         expect(data.error).toBe("Input values must be a hexadecimal")
     });
-    test('Performs Addition Unsuccessfully - Invalid addition', async() => {
+    test('Performs Addition Unsuccessfully - Empty addition', async() => {
         const res = await fetch('http://localhost:5000/calculate', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
