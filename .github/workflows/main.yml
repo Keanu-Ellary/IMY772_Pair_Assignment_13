@@ -115,6 +115,12 @@ jobs:
       working-directory: ./app/frontend
       run: npm install
 
+    - name: Cache Playwright browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright
+
     - name: Install playwright dependencies
       working-directory: ./app/frontend
       run: npx playwright install --with-deps
