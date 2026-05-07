@@ -14,8 +14,6 @@ def perform_addition(value_one, value_two):
     return final_result
 
 def valid_hexadecimal(value):
-    if len(value) == 0 or len(value) > 2:
-        return False
 
     hex_pattern = r"^[0-9A-Fa-f]+$"
     return bool(re.match(hex_pattern, value))

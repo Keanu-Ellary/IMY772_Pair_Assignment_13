@@ -26,6 +26,6 @@ def test_valid_hexadecimal():
     assert res == True
     
 def test_invalid_hexadecimal():
-    res = valid_hexadecimal("1FF")
+    res = valid_hexadecimal("1Y")
     assert res == False
     

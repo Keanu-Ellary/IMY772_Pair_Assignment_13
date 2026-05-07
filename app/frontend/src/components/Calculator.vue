@@ -37,9 +37,59 @@
         calculatorOutput.value = ""
     }
 
+    const validateInput = (input) => {
+        if (!input.includes('+') && !input.includes('-') && !input.includes('*') && !input.includes('/')) {
+            alert("Input must contain an operator")
+            return false
+        }
+
+        const inputValues = input.split(' ').filter(value => value !== '');
+
+        for (const value of inputValues) {
+            if (value!=='+' && value!=='-' && value!=='*' && value!=='/') {
+                if (value.length > 2) {
+                    alert("Input values must be 1 or 2 digits")
+                    return false
+                }
+            }
+        }
+
+        if (inputValues.length < 3) {
+            alert("Input must have atleast 2 hexadecimals values and 1 operator")
+            return false
+        }
+
+        return true
+    }
+
+    const validateOutput = (output) => {
+        if (output.length > 4) {
+            alert("Output is greater than 4 digits")
+            return false
+        }
+
+        if (output.includes('-')) {
+            alert("Output is negative")
+            return false
+        }
+
+        if (output.includes('.')) {
+            alert("Output has decimal places")
+            return false
+        }
+
+        return true
+    }
+
     const calculateOutput = async () => {
         let calculatorValidInput = calculatorInput.value.replaceAll('÷', '/')
         calculatorValidInput = calculatorValidInput.replaceAll('×', '*')
+
+        const isValidInput = validateInput(calculatorValidInput)
+        if (!isValidInput) {
+            calculatorOutput.value = "Error";
+            return;
+        }
         
         const res = await fetch('http://localhost:5000/calculate', {
             method: 'POST',
@@ -58,6 +108,11 @@
         }
         else
         {
+            const isValidOutput = validateOutput(data.result)
+            if (!isValidOutput) {
+                calculatorOutput.value = "Error";
+                return;
+            }
             calculatorOutput.value = data.result;
         }
     }
