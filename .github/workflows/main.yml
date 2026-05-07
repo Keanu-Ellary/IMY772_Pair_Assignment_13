@@ -7,7 +7,7 @@ on:
     branches: "**"
 
 jobs:
-  test:
+  backend-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +26,13 @@ jobs:
 
     - name: Run backend tests
       run: pytest
+    
+  frontend-and-integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Start backend server
       working-directory: ./app
