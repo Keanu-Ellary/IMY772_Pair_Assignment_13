@@ -297,7 +297,7 @@ describe("API Integration", () => {
         expect(data.error).toBeDefined();
         expect(data.error).toBe("Output of subtraction must not be negative")
     });
-    test('Performs Multiplication Unsuccessfully', async() => {
+    test('Performs Multiplication Unsuccessfully - Invalid input exceeding 2 digits', async() => {
         const res = await fetch('http://localhost:5000/calculate', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
