@@ -2,12 +2,12 @@ name: Run CI/CD Tests
 
 on:
   push:
-    branches: [main, Section-2]
+    branches: "**"
   pull_request:
-    branches: [main, Section-2]
+    branches: "**"
 
 jobs:
-  test:
+  backend-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +19,112 @@ jobs:
       with:
         python-version: "3.11.7"
 
-    - name: Install dependancies
-      run: python -m pip install --upgrade pip
+    - name: Install backend dependencies
+      run: | 
+        python -m pip install --upgrade pip
+        pip install flask flask-cors pytest
 
-    - name: Install pytest
-      run: pip install pytest
-
-    - name: Run tests
+    - name: Run backend tests
       run: pytest
+    
+  frontend-unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+      with: 
+        node-version: "20"
+        cache: "npm"
+        cache-dependency-path: app/frontend/package-lock.json
+
+    - name: Install frontend dependencies
+      working-directory: ./app/frontend
+      run: npm install
+
+    - name: Run frontend tests
+      working-directory: ./app/frontend
+      run: npm run test:unit
+
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11.7"
+
+    - name: Install backend dependencies
+      run: | 
+        python -m pip install --upgrade pip
+        pip install flask flask-cors
+
+    - name: Start backend server
+      working-directory: ./app
+      run: |
+        nohup python -m backend.app &
+        sleep 5
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+      with: 
+        node-version: "20"
+        cache: "npm"
+        cache-dependency-path: app/frontend/package-lock.json
+
+    - name: Install frontend dependencies
+      working-directory: ./app/frontend
+      run: npm install
+
+    - name: Run integration tests
+      working-directory: ./app/frontend
+      run: npm run test:integration
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11.7"
+
+    - name: Install backend dependencies
+      run: | 
+        python -m pip install --upgrade pip
+        pip install flask flask-cors
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+      with: 
+        node-version: "20"
+        cache: "npm"
+        cache-dependency-path: app/frontend/package-lock.json
+
+    - name: Install frontend dependencies
+      working-directory: ./app/frontend
+      run: npm install
+
+    - name: Cache Playwright browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright
+
+    - name: Install playwright dependencies
+      working-directory: ./app/frontend
+      run: npx playwright install
+
+    - name: Run e2e tests
+      working-directory: ./app/frontend
+      run: npm run test:e2e

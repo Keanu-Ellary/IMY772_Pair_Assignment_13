@@ -26,12 +26,12 @@ from backend.calculator import (
 
 def test_handle_invalid_input():
     with pytest.raises(ValueError) as error:
-        handle_input("1F +")
+        handle_input("1F +", False)
     assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
         
 def test_handle_empty_input():
     with pytest.raises(ValueError) as error:
-        handle_input("")
+        handle_input("", False)
     assert str(error.value) == "Input cannot be empty"
 
 def test_is_invalid_digit_amount():
@@ -57,7 +57,7 @@ def test_empty_addition():
     
 def test_invalid_addition():
     with pytest.raises(ValueError) as error:
-        perform_addition("1FF", "B78")
+        perform_addition("1Y", "B78")
     assert str(error.value) == "Input for addition must be a valid hexadecimal bewteen 1 and 2 digits"
     
 def test_empty_division():
@@ -67,18 +67,18 @@ def test_empty_division():
     
 def test_invalid_division():
     with pytest.raises(ValueError) as error:
-        perform_division("1FF", "B78")
+        perform_division("1Y", "B78")
     assert str(error.value) == "Input for division must be a valid hexadecimal bewteen 1 and 2 digits"
     
 def test_division_by_zero():
     with pytest.raises(ValueError) as error:
-        perform_division("1FF", "0")
-    assert str(error.value) == "Input for division must be a valid hexadecimal bewteen 1 and 2 digits"
+        perform_division("1F", "0")
+    assert str(error.value) == "Division by 0 is not allowed"
     
 def test_output_too_long():
     with pytest.raises(ValueError) as error:
         perform_multiplication("FFFF", "FF")
-    assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
+    assert str(error.value) == "Output is greater than 4 digits"
     
 def test_invalid_hex_number():
     with pytest.raises(ValueError) as error:
@@ -97,57 +97,52 @@ def test_negative_result():
     
 def test_invalid_hex_number():
     with pytest.raises(ValueError) as error:
-        perform_subtraction("G", "1")
+        perform_subtraction("Y", "1")
     assert str(error.value) == "Input for subtraction must be a valid hexadecimal bewteen 1 and 2 digits"
     
 def test_invalid_input():
     with pytest.raises(ValueError) as error:
-        perform_subtraction("ABC", "1")
+        perform_subtraction("Y", "1")
     assert str(error.value) == "Input for subtraction must be a valid hexadecimal bewteen 1 and 2 digits"
     
 def test_no_decimal():
     result = perform_multiplication("2", "2")
     assert "." not in result
    
-def test_output_too_long():
-    with pytest.raises(ValueError) as error:
-        perform_subtraction("FFFF", "1")
-    assert str(error.value) == "Input for subtraction must be a valid hexadecimal bewteen 1 and 2 digits"
-        
 "Calculate"
 def test_calculate_invalid_input():
     with pytest.raises(ValueError) as error:
-        calculate("1F +")
+        calculate("1F +", False)
     assert str(error.value) == "Input must have atleast 2 hexadecimals values and 1 operator"
         
 def test_calculate_empty_input():
     with pytest.raises(ValueError) as error:
-        calculate("")
+        calculate("", False)
     assert str(error.value) == "Input cannot be empty"
     
 def test_calculate_is_negative():
     with pytest.raises(ValueError) as error:
-        calculate("4 - 5")
+        calculate("4 - 5", False)
     assert str(error.value) == "Output of subtraction must not be negative"
     
 def test_calculate_contains_decimal_places():
     with pytest.raises(ValueError) as error:
-        calculate("1 / 4")
+        calculate("1 / 4", False)
     assert str(error.value) == "Decimal results not allowed"
         
 def test_calculate_invalid_addition():
     with pytest.raises(ValueError) as error:
-        calculate("1FF + B78")
+        calculate("1FF + B78", False)
     assert str(error.value) == "Input values must be 1 or 2 digits"
         
 def test_calculate_invalid_division():
     with pytest.raises(ValueError) as error:
-        calculate("1FF / B78")
+        calculate("1FF / B78", False)
     assert str(error.value) == "Input values must be 1 or 2 digits"
         
 def test_calculate_division_by_zero():
     with pytest.raises(ValueError) as error:
-        calculate("1F / 0")
+        calculate("1F / 0", False)
     assert str(error.value) == "Division by 0 is not allowed"
 
 "Calculate Multiple"

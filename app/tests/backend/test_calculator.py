@@ -6,19 +6,19 @@ from backend.calculator import (
 )
 
 def test_calculate_addition_success():
-    res = calculate("6 + 6")
+    res = calculate("6 + 6",False)
     assert res == "C"
     
 def test_calculate_subtaction_success():
-    res = calculate("6 - 6")
+    res = calculate("6 - 6",False)
     assert res == "0"
     
 def test_calculate_division_success():
-    res = calculate("6 / 6")
+    res = calculate("6 / 6",False)
     assert res == "1"
     
 def test_calculate_multiplication_success():
-    res = calculate("6 * 6")
+    res = calculate("6 * 6",False)
     assert res == "24"
     
 def test_calculate_expression_success():
