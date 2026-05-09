@@ -161,7 +161,7 @@ test('Should handle incorrect subtraction - negative input', async ({page}) => {
         page.getByTestId('calculator-output')
     ).toHaveText('Error');
 });
-test('Should handle incorrect multiplication - invalid input', async ({page}) => {
+test('Should handle incorrect multiplication - invalid input exceeding 2 digits', async ({page}) => {
     await page.goto('http://localhost:5173');
 
     await page.getByTestId('btn-f').click();
