@@ -127,4 +127,6 @@ jobs:
 
     - name: Run e2e tests
       working-directory: ./app/frontend
+      build-args: |
+            VITE_API_URL=${{ secrets.TEST_API_URL }}
       run: npm run test:e2e

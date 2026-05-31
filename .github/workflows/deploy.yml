@@ -68,6 +68,8 @@ jobs:
           context: ./app/frontend
           file: ./app/frontend/Dockerfile
           push: true
+          build-args: |
+            VITE_API_URL=${{ secrets.PRODUCTION_API_URL }}
           tags: |
             ghcr.io/keanu-ellary/calculator-frontend:latest
             ghcr.io/keanu-ellary/calculator-frontend:${{ github.ref_name }}
