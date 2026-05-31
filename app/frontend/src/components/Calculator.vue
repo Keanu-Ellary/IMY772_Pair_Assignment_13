@@ -2,6 +2,8 @@
     import { Delete, Trash, Divide, Plus, Minus, X, Equal  } from 'lucide-vue-next'
     import { ref } from 'vue'
 
+    const API_URL = import.meta.env.VITE_API_URL
+
     const calculatorInput = ref('')
     const calculatorOutput = ref('')
 
@@ -91,7 +93,7 @@
             return;
         }
         
-        const res = await fetch('http://localhost:5000/calculate', {
+        const res = await fetch(`${API_URL}/calculate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,0 +1,15 @@
+services:
+
+  backend:
+    image: ghcr.io/keanu-ellary/calculator-backend:latest
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+
+  frontend:
+    image: ghcr.io/keanu-ellary/calculator-frontend:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

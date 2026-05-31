@@ -7,13 +7,13 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Command to install Python Packages
-RUN pip install --no-cache-dir flask flask-cors
+RUN pip install --no-cache-dir flask flask-cors gunicorn
 
 # Copy backend source code
-COPY . .
+COPY backend/ ./backend/
 
 # Expose flask port number
 EXPOSE 5000
 
 # Run application
-CMD [ "python", "-m", "backend.app" ]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "backend.app:app"]

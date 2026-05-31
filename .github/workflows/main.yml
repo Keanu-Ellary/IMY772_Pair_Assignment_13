@@ -127,4 +127,6 @@ jobs:
 
     - name: Run e2e tests
       working-directory: ./app/frontend
+      env:
+        VITE_API_URL: http://localhost:5000
       run: npm run test:e2e
