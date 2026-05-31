@@ -91,7 +91,7 @@
             return;
         }
         
-        const res = await fetch('http://localhost:5000/calculate', {
+        const res = await fetch('http://54.167.36.77:5000/calculate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
