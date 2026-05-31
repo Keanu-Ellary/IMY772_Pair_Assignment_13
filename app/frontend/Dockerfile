@@ -1,5 +1,5 @@
 # Node image
-FROM node:20
+FROM node:20 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -13,8 +13,13 @@ RUN npm install
 # Copy frontend source code
 COPY . .
 
+RUN npm run build 
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+
 # Expose port for Vite
-EXPOSE 5173
+EXPOSE 80
 
 # Start development server
-CMD [ "npm", "run", "dev", "--", "--host" ]
+CMD ["nginx", "-g", "daemon off;"]
